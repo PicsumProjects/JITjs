@@ -1,4 +1,5 @@
 export const LASTINSTR = 142;
+
 export type Instr = {
   type: number = -1;
   args: number[] = [];
@@ -10,6 +11,14 @@ export type Func = {
 };
 
 export type JITJSModule = Func[];
+
+export type CompiledModule = any;
+
+export type BackendList = {
+  [name: string]: (mod: JITJSModule, name: string) => CompiledModule;
+};
+
+export var backendList: BackendList = {};
 
 function checkInstr(instr: Instr): void
 {
