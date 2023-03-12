@@ -3,6 +3,14 @@ export type Instr = {
   type: number = -1;
   args: number[] = [];
 };
+
+export type Func = {
+  id: bigint = 0n;
+  instrs: Instr[] = [];
+};
+
+export type JITJSModule = Func[];
+
 function checkInstr(instr: Instr): void
 {
   for(const arg of instr.args)
