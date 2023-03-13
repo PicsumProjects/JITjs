@@ -1,9 +1,4 @@
-import {
-  JITJSModule,
-  Func,
-  Instr,
-  backendList
-} from './defs&utils';
+/// <reference path="./defs&utils.ts" />
 
 export function asmModule(mod: JITJSModule, name: string): any
 {
@@ -607,3 +602,6 @@ function asmSingleInstr(instr: Instr): string
       break;
   }
 };
+
+
+backendList['asm'] = asmModule;
