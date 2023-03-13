@@ -12,10 +12,10 @@ export function asmModule(mod: JITJSModule, name: string): any
   return Function(code + '      getregsi8: getregsi8,\n      getregsu8: getregsu8,\n      getregsi16: getregsi16,\n      getregsu16: getregsu16,\n      getregsi32: getregsi32,\n      getregsf32: getregsf32,\n      getregsf64: getregsf64\n    };\n};')()();
 };
 
-function asmFunc(instrs: Func)
+function asmFunc(instrs: Func, count: number)
 {
-  let base = `    function $${Number(instrs.id)}()\n    {\n`;
-  for(const instr of instrs) base += '        ' + asmSingleInstr(instr);
+  let base = `    function $${count}()\n    {\n`;
+  for(const instr of instrs.instrs) base += '        ' + asmSingleInstr(instr);
   return base + '    };\n\n';
 };
 
