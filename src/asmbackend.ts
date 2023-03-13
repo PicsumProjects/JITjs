@@ -1,5 +1,13 @@
-function asmModule(mod: JITModule, name: string): any
+import {
+  JITJSModule,
+  Func,
+  Instr,
+  backendList
+} from './defs&utils';
+
+export function asmModule(mod: JITJSModule, name: string): any
 {
+  
   var i = 0;
   var code = `return function ${name}()\n{\n    "use asm";\n\n    var regsi8 = new Int8Array(64);\n    var regsu8 = new Uint8Array(64);\n    var regsi16 = new Int16Array(64);\n    var regsu16 = new Uint16Array(64);\n    var regsi32 = new Int32Array(64);\n    var regsu32 = new Uint32Array(64);\n    var regsf32 = new Float32Array(64);\n    var regsf64 = new Float64Array(64);\n\n    function getregsi8()\n    {\n        return regsi8;\n    };\n\n    function getregsu8()\n    {\n        return regsu8;\n    };\n\n    function getregsi16()\n    {\n        return regsi16;\n    };\n\n    function getregsu16()\n    {\n        return regsu16;\n    };\n\n    function getregsi32()\n    {\n        return regsi32;\n    };\n\n    function getregsf32()\n    {\n        return regsf32;\n    };\n\n    function getregsf64()\n    {\n        return regsf64;\n    };\n\n\n`;
   for(const func of mod)
@@ -18,6 +26,7 @@ function asmFunc(instrs: Func)
 
 function asmSingleInstr(instr: Instr): string
 {
+  if(!("asm" in Object.keys(backendList))) backendList["asm"] = asmModule;
   switch(instr.type)
   {
     case 0: // F64ADD
