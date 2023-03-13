@@ -1,13 +1,13 @@
 export const LASTINSTR = 142;
 
 export type Instr = {
-  type: number = -1;
-  args: number[] = [];
+  type: number;
+  args: number[];
 };
 
 export type Func = {
-  id: bigint = 0n;
-  instrs: Instr[] = [];
+  id: bigint;
+  instrs: Instr[];
 };
 
 export type JITJSModule = Func[];
